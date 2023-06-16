@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -14,14 +11,14 @@ model User {
   user_id   Int         @id @default(autoincrement())
   email     String      @unique @db.VarChar(64)
   avatar    String      @default("https://cdn.pupi.vn/images/teacher/teacher-badges/silver-badge.webp") @db.VarChar(128)
+  mobile    Decimal     @unique @db.Decimal
+  bio       String?
   gender    Int         @default(0)
-  Bio       String?
   firstName String      @db.VarChar(36)
   lastName  String?     @db.VarChar(36)
-  mobile    Int         @unique @db.Integer
   password  String      @db.VarChar(128)
-  createdAt Int
-  updatedAt Int
+  createdAt Decimal     @db.Decimal
+  updatedAt Decimal     @db.Decimal
   isDeleted Int
   Extension Extension[]
 }
@@ -29,10 +26,10 @@ model User {
 model Extension {
   extension_id Int    @id @default(autoincrement())
   name         String
-  createdBy    User?  @relation(fields: [userUser_id], references: [user_id])
   state        Int
   createdAt    Int
   updatedAt    Int
   isDeleted    Int
   userUser_id  Int?
+  createdBy    User?  @relation(fields: [userUser_id], references: [user_id])
 }

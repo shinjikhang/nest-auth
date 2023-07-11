@@ -4,8 +4,10 @@ import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  //Use middleware global
+
+  //Use global middleware
   app.useGlobalPipes(new ValidationPipe());
+
   await app.listen(3000);
 }
 

@@ -9,3 +9,37 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+//npx prisma migrate dev : apply "schema.prisma" to your database
+
+//Define entities, db relations, contrains
+model User {
+  userId    Int      @id @default(autoincrement()) // PK - default increment
+  email     String   @unique
+  mobile    String
+  password  String
+  firstName String? //can be null(optional)
+  lastName  String? //can be null(optional)
+  state     Int
+  createdAt DateTime @default(now())
+  isDeleted Int
+
+  //relationship
+  notes Note[]
+
+  @@map("user") //tbl "users" in postgres db
+}
+
+model Note {
+  noteId      Int      @id @default(autoincrement())
+  title       String
+  description String
+  url         String
+  //other fields...
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  userId      Int? //like "foreign key"
+  user        User?    @relation(fields: [userId], references: [userId])
+
+  @@map("note") //tbl "note" in postgres db
+}

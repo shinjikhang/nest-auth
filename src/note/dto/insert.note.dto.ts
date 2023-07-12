@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
-export class insertNoteDto {
+export class InsertNoteDto {
   @IsString()
   @IsNotEmpty()
   title: string;

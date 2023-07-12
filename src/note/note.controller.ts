@@ -3,6 +3,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { NoteService } from './note.service';
 import { User } from 'src/auth/decorator/user.decorator';
 import { User as UserEntity } from '@prisma/client';
+import { InsertNoteDto } from './dto';
 
 @UseGuards(AuthGuard('jwt'))
 @Controller('note')
@@ -19,7 +20,7 @@ export class NoteController {
   }
 
   @Post()
-  insert() {
+  insert(@User('userId') userId: number, @Body() insertDto: InsertNoteDto) {
     // return this.noteService.insert();
   }
 

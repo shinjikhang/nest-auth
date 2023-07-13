@@ -1,19 +1,16 @@
-import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString, Length } from 'class-validator';
 
 export class InsertNoteDto {
   @IsString()
   @IsNotEmpty()
+  @Length(5)
   title: string;
 
   @IsString()
   @IsOptional()
-  description?: string;
+  description: string;
 
   @IsString()
   @IsNotEmpty()
   url: string;
-
-  //   createdAt: Date;
-
-  userId: number;
 }

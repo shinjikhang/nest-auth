@@ -33,7 +33,7 @@ model User {
 model Note {
   noteId      Int      @id @default(autoincrement())
   title       String
-  description String
+  description String?
   url         String
   //other fields...
   createdAt   DateTime @default(now())
